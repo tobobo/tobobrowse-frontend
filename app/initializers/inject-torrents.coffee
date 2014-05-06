@@ -50,11 +50,11 @@ torrentsInitializer =
 
       _addTorrent: (model, torrent) ->
         dupe = model.find (maybeDupe) =>
-          sameDate = maybeDupe['addedDate'] == torrent['addedDate']
+          sameDate = maybeDupe.get('addedDate') == torrent['addedDate']
           if torrent['sizeWhenDone'] > 0
             sameDate
           else
-            sameDate and maybeDupe['sizeWhenDone'] == torrent['sizeWhenDone']
+            sameDate and maybeDupe.get('sizeWhenDone') == torrent['sizeWhenDone']
         if dupe?
           dupe.setProperties torrent
         else

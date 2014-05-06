@@ -99,7 +99,8 @@ module.exports = function(grunt) {
                      'createDistVersion'
                      ]);
 
-
+  grunt.registerTask('deploy', 'deploy it', ['dist', 's3']);
+  
   // Default Task
   // ------------------
   grunt.registerTask('default', "Build (in debug mode) & test your application.", ['test']);
@@ -148,6 +149,7 @@ module.exports = function(grunt) {
                      'fancySprites:create',
                      'concurrent:buildDist', // Executed in parallel, see config below
                      ]));
+
 
   grunt.registerTask('build:debug', filterAvailable([
                      'jshint:tooling',
