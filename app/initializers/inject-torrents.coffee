@@ -24,32 +24,28 @@ torrentsInitializer =
           , ((error) -> Ember.run -> reject error)
 
       content: ((prop, value) ->
-        if value? then value
-        else
-          @refreshTimer()
+        Ember.run.next => @refreshTimer()
+        Ember.A()
       ).property()
 
-      _getTorrents: (model) ->
+      refreshTimer: ->
+        @refresh()
+        .then =>
+          Ember.run.later =>
+            @refreshTimer()
+          , 5000
+
+      refresh: ->
         @set 'isLoading', true
         @request 'torrents'
         .then (data) =>
           for torrent in data['torrents']
-            @_addTorrent model, torrent
+            @_addTorrent torrent
           @set 'isLoading', false
+          Ember.RSVP.resolve @get('content')
 
-      refreshTimer: ->
-        Ember.run.later =>
-          @refreshTimer()
-        , 5000
-        @refresh()
-
-      refresh: ->
-        model = @cacheFor('model') or Ember.A()
-        @_getTorrents model
-        model
-
-      _addTorrent: (model, torrent) ->
-        dupe = model.find (maybeDupe) =>
+      _addTorrent: (torrent) ->
+        dupe = @get('content').find (maybeDupe) =>
           sameDate = maybeDupe.get('addedDate') == torrent['addedDate']
           if torrent['sizeWhenDone'] > 0
             sameDate
@@ -58,7 +54,7 @@ torrentsInitializer =
         if dupe?
           dupe.setProperties torrent
         else
-          model.pushObject Ember.Object.create(torrent)
+          @get('content').pushObject Ember.Object.create(torrent)
 
       addTorrent: (url) ->
         @request 'torrents', 'POST',
