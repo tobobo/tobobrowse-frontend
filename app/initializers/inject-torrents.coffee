@@ -12,7 +12,6 @@ torrentsInitializer =
       sortAscending: false
       url: 'http://chips.whatbox.ca:30446'
       request: (path = '', method = 'GET', data = {}) ->
-        console.log 'data is', data
         new Ember.RSVP.Promise (resolve, reject) =>
           Ember.$.ajax
             method: method
@@ -50,7 +49,6 @@ torrentsInitializer =
         model
 
       _addTorrent: (model, torrent) ->
-        console.log 'adding torrent', torrent
         dupe = model.find (maybeDupe) =>
           sameDate = maybeDupe['addedDate'] == torrent['addedDate']
           if torrent['sizeWhenDone'] > 0
