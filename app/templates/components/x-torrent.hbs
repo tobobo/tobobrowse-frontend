@@ -1,0 +1,19 @@
+{{#if isComplete}}
+  <a href="#" {{action 'getTorrent'}}>
+  {{torrent.name}}
+  </a>
+{{else}}
+  {{torrent.name}}
+{{/if}}
+{{#if isDownloading}}
+  Downloading ({{torrent.percentDone}}%)
+{{else}}
+  Complete
+{{/if}}
+{{#if torrent.downloadUrl}}
+  <a {{bind-attr href='torrent.downloadUrl'}} target="_blank">Download Link</a>
+{{else}}
+  {{#if torrent.gettingInfo}}
+    Getting download link...
+  {{/if}}
+{{/if}}

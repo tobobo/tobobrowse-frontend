@@ -10,7 +10,9 @@ torrentsInitializer =
     container.register key, Ember.ArrayController.extend
       sortProperties: ['addedDate']
       sortAscending: false
+      url: 'http://chips.whatbox.ca:30446'
       request: (path = '', method = 'GET', data = {}) ->
+        console.log 'data is', data
         new Ember.RSVP.Promise (resolve, reject) =>
           Ember.$.ajax
             method: method
@@ -25,24 +27,45 @@ torrentsInitializer =
       content: ((prop, value) ->
         if value? then value
         else
-          model = @cacheFor(prop) or Ember.A()
-          @set 'isLoading', true
-          @request 'torrents'
-          .then (data) =>
-            for torrent in data['torrents']
-              @addTorrent model, torrent
-            @set 'isLoading', false
-          model
+          @refreshTimer()
       ).property()
 
-      addTorrent: (model, torrent) ->
+      _getTorrents: (model) ->
+        @set 'isLoading', true
+        @request 'torrents'
+        .then (data) =>
+          for torrent in data['torrents']
+            @_addTorrent model, torrent
+          @set 'isLoading', false
+
+      refreshTimer: ->
+        Ember.run.later =>
+          @refreshTimer()
+        , 5000
+        @refresh()
+
+      refresh: ->
+        model = @cacheFor('model') or Ember.A()
+        @_getTorrents model
+        model
+
+      _addTorrent: (model, torrent) ->
+        console.log 'adding torrent', torrent
         dupe = model.find (maybeDupe) =>
-          maybeDupe['addedDate'] == torrent['addedDate'] and
-            maybeDupe['sizeWhenDone'] == torrent['sizeWhenDone']
+          sameDate = maybeDupe['addedDate'] == torrent['addedDate']
+          if torrent['sizeWhenDone'] > 0
+            sameDate
+          else
+            sameDate and maybeDupe['sizeWhenDone'] == torrent['sizeWhenDone']
         if dupe?
           dupe.setProperties torrent
         else
           model.pushObject Ember.Object.create(torrent)
+
+      addTorrent: (url) ->
+        @request 'torrents', 'POST',
+          torrent:
+            url: url
 
       getTorrent: (torrent) ->
         torrent.set 'gettingInfo', true

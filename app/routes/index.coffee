@@ -3,7 +3,11 @@ IndexRoute = Ember.Route.extend
     ['red', 'yellow', 'blue']
 
   actions:
-    getTorrent: (torrent) ->
-      @get('torrents').getTorrent(torrent)
+
+    addTorrent: ->
+      @get('torrents').addTorrent @get('controller.url')
+      .then =>
+        @set 'controller.url', null
+        @get('torrents').refresh()
 
 `export default IndexRoute`
