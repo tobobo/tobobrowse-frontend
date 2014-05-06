@@ -1,0 +1,20 @@
+<ul>
+{{#each torrents}}
+  {{log this}}
+  <li><a href="#" {{action 'getTorrent' this}}>{{name}}</a>
+    {{#if downloadUrl}}
+      <a href="{{unbound downloadUrl}}" target="_blank">Download Link</a>
+    {{else}}
+      {{#if gettingInfo}}
+        Getting download link...
+      {{/if}}
+    {{/if}}
+  </li>
+{{else}}
+  {{#if torrents.isLoading}}
+    <li>Loading torrents...</li>
+  {{else}}
+    <li>No torrents!</li>
+  {{/if}}
+{{/each}}
+</ul>
