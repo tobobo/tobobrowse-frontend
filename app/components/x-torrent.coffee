@@ -17,7 +17,7 @@ TorrentComponent = Ember.Component.extend
     getTorrent: ->
       @get('torrents').getTorrent @get('torrent')
     delete: ->
-      if confirm("Are you sure you want to delete \""#{@get('torrent.name')}\"?")
+      if confirm("Are you sure you want to delete \"#{@get('torrent.name')}\"?")
         @get('torrents').deleteTorrent @get('torrent')
 
 `export default TorrentComponent`
