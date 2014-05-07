@@ -10,8 +10,12 @@
 {{else}}
   Complete
 {{/if}}
-{{#if torrent.downloadUrl}}
-  <a {{bind-attr href='torrent.downloadUrl'}} target="_blank">Download Link</a>
+{{#if torrent.canDownload}}
+  <ul>
+    {{#each torrent.files}}
+      <a {{bind-attr href='url'}} target"_blank">{{name}}</a>
+    {{/each}}
+  </ul>
 {{else}}
   {{#if torrent.gettingInfo}}
     Getting download link...
