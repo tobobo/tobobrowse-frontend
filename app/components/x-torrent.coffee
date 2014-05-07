@@ -8,6 +8,9 @@ TorrentComponent = Ember.Component.extend
     files = Ember.A(@get('torrent.files'))
     files.sortBy 'name'
   ).property 'torrent.files'
+  percentStr: (->
+    @get('torrent.percentDone').toString().substr 0, 5
+  ).property 'torrent.percentDone'
 
   sortedFilesDidChange: (->
     console.log @get('sortedFiles')

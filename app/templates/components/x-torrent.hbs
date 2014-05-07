@@ -6,11 +6,11 @@
   {{torrent.name}}
 {{/if}}
 {{#if isDownloading}}
-  Downloading ({{torrent.percentDone}}%)
+  downloading ({{percentStr}}%)
 {{else}}
-  Complete
+  complete
 {{/if}}
-<a href="#" {{action 'delete'}}>delete</a>
+<a class="delete" href="#" {{action 'delete'}}>delete</a>
 {{#if torrent.canDownload}}
   <ul>
     {{#each sortedFiles}}
