@@ -29,11 +29,14 @@ torrentsInitializer =
       ).property()
 
       refreshTimer: ->
+        if @get('timerRef')?
+          Ember.run.cancel @get('timerRef')
         @refresh()
         .then =>
-          Ember.run.later =>
+          timerRef = Ember.run.later =>
             @refreshTimer()
           , 5000
+          @set 'timerRef', timerRef
 
       refresh: ->
         @set 'isLoading', true
@@ -60,6 +63,8 @@ torrentsInitializer =
         @request 'torrents', 'POST',
           torrent:
             url: url
+        .then =>
+          @refreshTimer()
 
       getTorrent: (torrent) ->
         torrent.set 'gettingInfo', true
@@ -67,6 +72,13 @@ torrentsInitializer =
         .then (data) =>
           torrent.set 'gettingInfo', false
           torrent.setProperties data['torrent']
+
+      deleteTorrent: (torrent) ->
+        torrent.set 'deleting', true
+        @request "torrents/#{torrent.get('name')}", 'DELETE'
+        .then =>
+          @get('content').removeObject torrent
+          @refreshTimer()
 
       setCredentials: (username, passwd) ->
         @setProperties

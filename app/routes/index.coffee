@@ -8,6 +8,5 @@ IndexRoute = Ember.Route.extend
       @get('torrents').addTorrent @get('controller.url')
       .then =>
         @set 'controller.url', null
-        @get('torrents').refresh()
 
 `export default IndexRoute`
