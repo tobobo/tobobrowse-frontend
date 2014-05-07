@@ -1,3 +1,5 @@
+`import ajax from 'ic-ajax'`
+
 torrentsInitializer =
   name: 'injectTorrents'
   after: ['store']
@@ -12,16 +14,13 @@ torrentsInitializer =
       sortAscending: false
       url: 'http://chips.whatbox.ca:30446'
       request: (path = '', method = 'GET', data = {}) ->
-        new Ember.RSVP.Promise (resolve, reject) =>
-          Ember.$.ajax
-            method: method
-            url: "http://chips.whatbox.ca:8000/#{path}"
-            data: data
-            dataType: 'json'
-            xhrFields:
-              withCredentials: true
-          .then ((data) -> Ember.run -> resolve data)
-          , ((error) -> Ember.run -> reject error)
+        ajax
+          method: method
+          url: "http://chips.whatbox.ca:8000/#{path}"
+          data: data
+          dataType: 'json'
+          xhrFields:
+            withCredentials: true
 
       content: ((prop, value) ->
         Ember.run.next => @refreshTimer()
@@ -31,12 +30,13 @@ torrentsInitializer =
       refreshTimer: ->
         if @get('timerRef')?
           Ember.run.cancel @get('timerRef')
-        @refresh()
-        .then =>
+        refresh = @refresh()
+        afterRefresh = =>
           timerRef = Ember.run.later =>
             @refreshTimer()
           , 5000
           @set 'timerRef', timerRef
+        refresh.then afterRefresh, afterRefresh
 
       refresh: ->
         @set 'isLoading', true
