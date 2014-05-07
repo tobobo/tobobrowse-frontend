@@ -7,7 +7,9 @@
     "Ember": true,
     "Em": true,
     "DS": true,
-    "$": true
+    "$": true,
+    "ENV": true,
+    "module": true
   },
   "node" : false,
   "browser" : false,
@@ -33,5 +35,6 @@
   "strict": false,
   "white": false,
   "eqnull": true,
-  "esnext": true
+  "esnext": true,
+  "unused": true
 }

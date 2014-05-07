@@ -1,6 +1,7 @@
-import Application from 'appkit/app';
+var Application = require('tobobrowse-frontend/app')['default'];
+var Router = require('tobobrowse-frontend/router')['default'];
 
-function startApp(attrs) {
+export default function startApp(attrs) {
   var App;
 
   var attributes = Ember.merge({
@@ -9,6 +10,10 @@ function startApp(attrs) {
     LOG_ACTIVE_GENERATION:false,
     LOG_VIEW_LOOKUPS: false
   }, attrs); // but you can override;
+
+  Router.reopen({
+    location: 'none'
+  });
 
   Ember.run(function(){
     App = Application.create(attributes);
@@ -20,5 +25,3 @@ function startApp(attrs) {
 
   return App;
 }
-
-export default startApp;

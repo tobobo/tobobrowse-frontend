@@ -1,14 +1,12 @@
 document.write('<div id="ember-testing-container"><div id="ember-testing"></div></div>');
 
-var resolver = require('appkit/tests/helpers/resolver')['default'];
+Ember.testing = true;
+
+import resolver from './helpers/resolver';
 require('ember-qunit').setResolver(resolver);
 
-
-window.startApp          = require('appkit/tests/helpers/start-app')['default'];
-window.isolatedContainer = require('ember-qunit/isolated-container')['default'];
-
-function exists(selector, context) {
-  return !!find(selector, context).length;
+function exists(selector) {
+  return !!window.find(selector).length;
 }
 
 function getAssertionMessage(actual, expected, message) {
