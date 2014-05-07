@@ -1,5 +1,7 @@
 <p>{{input value=url}} <a href="#" {{action 'addTorrent'}}>Add Torrent</a></p>
 <p><a href="{{unbound torrents.url}}" target="_blank">Transmission UI</a></p>
+<p><a href="http://chips.whatbox.ca/private/" target="_blank">HTTP File Browser</a></p>
+<p><a href="https://chips.whatbox.ca/filebrowser/" target="_blank">File Manager</a></p>
 <ul>
 {{#each torrent in torrents}}
   {{x-torrent torrent=torrent torrents=torrents}}
