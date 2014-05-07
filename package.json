@@ -23,6 +23,9 @@
     "originate": "0.1.5",
     "broccoli-template": "0.1.1",
     "loom-generators-ember-appkit": "^1.1.0",
-    "broccoli-coffee": "~0.1.0"
+    "broccoli-coffee": "~0.1.0",
+    "grunt": "~0.4.4",
+    "grunt-s3": "~0.2.0-alpha.3",
+    "grunt-exec": "~0.4.5"
   }
 }
