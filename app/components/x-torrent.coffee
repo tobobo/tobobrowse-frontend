@@ -4,6 +4,14 @@ TorrentComponent = Ember.Component.extend
     @get('torrent.percentDone') < 100
   ).property('torrent.percentDone')
   isComplete: Ember.computed.not 'isDownloading'
+  sortedFiles: (->
+    files = Ember.A(@get('torrent.files'))
+    files.sortBy 'name'
+  ).property 'torrent.files'
+
+  sortedFilesDidChange: (->
+    console.log @get('sortedFiles')
+  ).observes('sortedFiles.@each')
 
   actions:
     getTorrent: ->

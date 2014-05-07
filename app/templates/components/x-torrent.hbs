@@ -12,8 +12,8 @@
 {{/if}}
 {{#if torrent.canDownload}}
   <ul>
-    {{#each torrent.files}}
-      <a {{bind-attr href='url'}} target"_blank">{{name}}</a>
+    {{#each sortedFiles}}
+      <li><a {{bind-attr href='url'}} target"_blank">{{name}}</a></li>
     {{/each}}
   </ul>
 {{else}}
