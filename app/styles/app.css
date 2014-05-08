@@ -68,7 +68,7 @@ a.delete {
   bottom: 0;
   left: 0;
   border-radius: 3px;
-  transition: width 0.5s linear;
-  -webkit-transition: width 0.5s linear;
-  -moz-transition: width 0.5s linear;
+  transition: width 0.2s ease-in-out;
+  -webkit-transition: width 0.2s ease-in-out;
+  -moz-transition: width 0.2s ease-in-out;
 }
