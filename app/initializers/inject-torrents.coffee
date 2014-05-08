@@ -13,7 +13,7 @@ torrentsInitializer =
       sortProperties: ['addedDate']
       sortAscending: false
       url: 'http://chips.whatbox.ca:30446'
-      request: (path = '', method = 'GET', data = {}, timeout = 0) ->
+      request: (path = '', method = 'GET', data = {}, timeout = -1) ->
         ajax
           method: method
           url: "http://chips.whatbox.ca:8000/#{path}"

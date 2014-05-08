@@ -22,6 +22,7 @@ ul.torrents {
 ul.torrents > li {
   width: 100%;
   padding: 0;
+  color: #888;
 }
 
 .torrent-info {
@@ -48,6 +49,10 @@ a:link, a:visited {
 
 a.delete {
   color: #9a3434;
+}
+
+.torrent-name {
+  color: #444;
 }
 
 .torrent-progress-container {

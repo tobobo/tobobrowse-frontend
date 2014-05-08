@@ -1,11 +1,11 @@
 <div class="relative">
   <div class="torrent-info">
     {{#if isComplete}}
-      <a href="#" {{action 'getTorrent'}}>
-      {{torrent.name}}
+      <a href="#" class="torrent-name" {{action 'getTorrent'}}>
+        {{formattedName}}
       </a>
     {{else}}
-      {{torrent.name}}
+      <span class="torrent-name">{{formattedName}}</span>
     {{/if}}
     {{#if isDownloading}}
       downloading ({{percentStr}}%, {{hh-mm-ss eta}} remaining)

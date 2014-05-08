@@ -1,6 +1,13 @@
 TorrentComponent = Ember.Component.extend
   tagName: 'li'
 
+  formattedName: (->
+    name = @get('torrent.name')
+    for char in ['\\.', '\\+']
+      name = name.replace new RegExp(char, 'g'), "#{char.replace(/\\/g, '')}&#8203;"
+    new Ember.Handlebars.SafeString name
+  ).property 'torrent.name'
+
   isDownloading: (->
     @get('torrent.percentDone') < 100
   ).property('torrent.percentDone')
