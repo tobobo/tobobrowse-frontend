@@ -15,6 +15,10 @@ TorrentComponent = Ember.Component.extend
     @get('torrent.percentDone').toString().substr 0, 5
   ).property 'torrent.percentDone'
 
+  progressStyle: (->
+    "width: #{@get('torrent.percentDone')}%;"
+  ).property 'torrent.percentDone'
+
   actions:
 
     getTorrent: ->
