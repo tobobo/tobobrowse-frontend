@@ -1,28 +1,30 @@
 <div class="relative">
-  {{#if isComplete}}
-    <a href="#" {{action 'getTorrent'}}>
-    {{torrent.name}}
-    </a>
-  {{else}}
-    {{torrent.name}}
-  {{/if}}
-  {{#if isDownloading}}
-    downloading ({{percentStr}}%, {{hh-mm-ss torrent.eta}} remaining)
-  {{else}}
-    complete
-  {{/if}}
-  <a class="delete" href="#" {{action 'delete'}}>delete</a>
-  {{#if torrent.canDownload}}
-    <ul>
-      {{#each sortedFiles}}
-        <li><a {{bind-attr href='url'}} target"_blank">{{name}}</a></li>
-      {{/each}}
-    </ul>
-  {{else}}
-    {{#if torrent.gettingInfo}}
-      getting download link...
+  <div class="torrent-info">
+    {{#if isComplete}}
+      <a href="#" {{action 'getTorrent'}}>
+      {{torrent.name}}
+      </a>
+    {{else}}
+      {{torrent.name}}
     {{/if}}
-  {{/if}}
+    {{#if isDownloading}}
+      downloading ({{percentStr}}%, {{hh-mm-ss eta}} remaining)
+    {{else}}
+      complete
+    {{/if}}
+    <a class="delete" href="#" {{action 'delete'}}>delete</a>
+    {{#if torrent.canDownload}}
+      <ul>
+        {{#each sortedFiles}}
+          <li><a {{bind-attr href='url'}} target"_blank">{{name}}</a></li>
+        {{/each}}
+      </ul>
+    {{else}}
+      {{#if torrent.gettingInfo}}
+        getting download link...
+      {{/if}}
+    {{/if}}
+  </div>
   {{#if isDownloading}}
     <div class="torrent-progress-container"><div class="torrent-progress" {{bind-attr style='progressStyle'}}></div></div>
   {{/if}}

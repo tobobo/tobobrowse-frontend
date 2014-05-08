@@ -19,6 +19,13 @@ TorrentComponent = Ember.Component.extend
     "width: #{@get('torrent.percentDone')}%;"
   ).property 'torrent.percentDone'
 
+  eta: (->
+    if @get('torrent.eta') > 0
+      @get('torrent.eta')
+    else
+      Infinity
+  ).property 'torrent.eta'
+
   actions:
 
     getTorrent: ->
