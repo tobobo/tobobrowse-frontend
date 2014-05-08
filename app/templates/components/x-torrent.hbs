@@ -6,7 +6,7 @@
   {{torrent.name}}
 {{/if}}
 {{#if isDownloading}}
-  downloading ({{percentStr}}%)
+  downloading ({{percentStr}}%, {{hh-mm-ss torrent.eta}} remaining)
 {{else}}
   complete
 {{/if}}
