@@ -22,8 +22,10 @@ TorrentComponent = Ember.Component.extend
   eta: (->
     if @get('torrent.eta') > 0
       @get('torrent.eta')
-    else
+    else if @get('torrent.percentDone') == 0
       Infinity
+    else
+      0
   ).property 'torrent.eta'
 
   actions:

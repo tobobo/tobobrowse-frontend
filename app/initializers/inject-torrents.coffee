@@ -13,11 +13,12 @@ torrentsInitializer =
       sortProperties: ['addedDate']
       sortAscending: false
       url: 'http://chips.whatbox.ca:30446'
-      request: (path = '', method = 'GET', data = {}) ->
+      request: (path = '', method = 'GET', data = {}, timeout = 0) ->
         ajax
           method: method
           url: "http://chips.whatbox.ca:8000/#{path}"
           data: data
+          timeout: timeout
           dataType: 'json'
           xhrFields:
             withCredentials: true
@@ -34,14 +35,28 @@ torrentsInitializer =
         afterRefresh = =>
           timerRef = Ember.run.later =>
             @refreshTimer()
-          , 5000
+          , @get('requestDelay')
           @set 'timerRef', timerRef
         refresh.then afterRefresh, afterRefresh
 
+      requestTime: 0
+      requestDelay: (->
+        requestTime = @get('requestTime')
+        delayBase = if requestTime < 500
+          500
+        else if requestTime > 5000
+          5000
+        else
+          requestTime
+        delayBase*2
+      ).property 'requestTime'
+
       refresh: ->
         @set 'isLoading', true
+        startTime = Date.now()
         @request 'torrents'
         .then (data) =>
+          @set 'requestTime', Date.now() - startTime
           for torrent in data['torrents']
             @_addTorrent torrent
           @set 'isLoading', false
@@ -68,16 +83,16 @@ torrentsInitializer =
 
       getTorrent: (torrent) ->
         torrent.set 'gettingInfo', true
-        @request "torrents/#{torrent.get('name')}"
+        @request "torrents/#{torrent.get('name')}", 'GET', {}, 10000
         .then (data) =>
           torrent.set 'gettingInfo', false
           torrent.setProperties data['torrent']
 
       deleteTorrent: (torrent) ->
         torrent.set 'deleting', true
+        @get('content').removeObject torrent
         @request "torrents/#{torrent.get('name')}", 'DELETE'
         .then =>
-          @get('content').removeObject torrent
           @refreshTimer()
 
       setCredentials: (username, passwd) ->
