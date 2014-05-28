@@ -1,12 +1,6 @@
 module.exports = (grunt) ->
 
   grunt.initConfig
-    exec:
-      build:
-        cmd: (env) ->
-          unless env? then env = 'development'
-          "ember build --environment #{env}"
-
     s3:
       options:
         key: process.env.TOBOBROWSE_AWS_ACCESS_KEY_ID
@@ -41,6 +35,6 @@ module.exports = (grunt) ->
       else
         grunt.task.run (origName + suffix)
 
-  gruntAlias 'build', 'Build the app', 'exec:build', 'development'
+  gruntAlias 'build', 'Build the app', 'ember:build', 'development'
 
-  gruntAlias 'deploy', 'Deploy to S3', ['build:development', 's3:deploy']
+  gruntAlias 'deploy', 'Deploy to S3', ['build:production', 's3:deploy']
