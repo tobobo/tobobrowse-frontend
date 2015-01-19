@@ -1,8 +1,9 @@
 `import Ember from 'ember'`
 `import ajax from 'ic-ajax'`
+console.log 'torrent initializer'
 
-torrentsInitializer =
-  name: 'injectTorrents'
+injectTorrents =
+  name: 'inject-torrents'
   after: ['store']
   initialize: (container, application) ->
 
@@ -10,6 +11,7 @@ torrentsInitializer =
     container.typeInjection type, 'store', 'store:main'
 
     key = "#{injection_type}:main"
+    console.log 'type injecting?'
     container.register key, Ember.ArrayController.extend
       sortProperties: ['addedDate']
       sortAscending: false
@@ -105,4 +107,4 @@ torrentsInitializer =
       for name in [injection_type]
         container.typeInjection type, name, key
 
-`export default torrentsInitializer`
+`export default injectTorrents`
