@@ -1,3 +1,5 @@
+`import Ember from 'ember'`
+
 TorrentComponent = Ember.Component.extend
   tagName: 'li'
 

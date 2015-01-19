@@ -1,3 +1,5 @@
+`import Ember from 'ember'`
+
 hhmmssHelper = Ember.Handlebars.makeBoundHelper (seconds) ->
   separator = ":"
   sections = []

@@ -1,3 +1,4 @@
+`import Ember from 'ember'`
 `import ajax from 'ic-ajax'`
 
 torrentsInitializer =
@@ -12,11 +13,11 @@ torrentsInitializer =
     container.register key, Ember.ArrayController.extend
       sortProperties: ['addedDate']
       sortAscending: false
-      url: 'http://chips.whatbox.ca:30446'
+      url: 'http://salsa.whatbox.ca:20008'
       request: (path = '', method = 'GET', data = {}, timeout = -1) ->
         ajax
           method: method
-          url: "http://chips.whatbox.ca:8000/#{path}"
+          url: "http://salsa.whatbox.ca:8000/#{path}"
           data: data
           timeout: timeout
           dataType: 'json'
