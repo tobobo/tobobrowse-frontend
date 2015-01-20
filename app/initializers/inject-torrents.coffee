@@ -1,6 +1,5 @@
 `import Ember from 'ember'`
 `import ajax from 'ic-ajax'`
-console.log 'torrent initializer'
 
 injectTorrents =
   name: 'inject-torrents'
@@ -11,7 +10,6 @@ injectTorrents =
     container.typeInjection type, 'store', 'store:main'
 
     key = "#{injection_type}:main"
-    console.log 'type injecting?'
     container.register key, Ember.ArrayController.extend
       sortProperties: ['addedDate']
       sortAscending: false
