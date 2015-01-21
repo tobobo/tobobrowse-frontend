@@ -17,7 +17,7 @@ injectTorrents =
       request: (path = '', method = 'GET', data = {}, timeout = -1) ->
         ajax
           method: method
-          url: "https://cucumber.whatbox.ca:8000/#{path}"
+          url: "http://cucumber.whatbox.ca:8000/#{path}"
           data: data
           timeout: timeout
           dataType: 'json'
