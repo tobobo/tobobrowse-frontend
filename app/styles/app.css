@@ -47,6 +47,11 @@ a:link, a:visited {
   text-decoration: none;
 }
 
+a.original-url {
+  font-size: 0.5em;
+  opacity: 0.8;
+}
+
 a.delete {
   color: #9a3434;
 }
