@@ -2,8 +2,17 @@ html, body {
   margin: 20px;
   font-family: "Helvetica Neue", sans-serif;
   font-weight: 300;
-  font-size: 24px;
   color: #444;
+}
+
+body {
+  font-size: 18px;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    font-size: 24px;
+  }
 }
 
 .relative {
@@ -29,6 +38,10 @@ ul.torrents > li {
   padding: 0.25em 0.25em;
 }
 
+.torrent-info ul {
+  margin-top: 1em;
+}
+
 li {
   margin-top: 0.33em;
   margin-bottom: 0.33em;
@@ -38,13 +51,45 @@ ul {
   margin-bottom: 1em;
 }
 
-input {
+.torrent-input {
+  width: 100%;
+  max-width: 400px;
+}
+
+.torrent-input input {
   font-size: 24px;
+  padding-left: 30px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.torrent-input:before {
+  content: '+';
+  padding: 1px 12px;
+  position: absolute;
+  opacity: 0.25;
+}
+
+.torrent-input:hover::before {
+  opacity: 0.5;
+}
+
+.outbound-links {
+  font-size: 0.7em;
+}
+
+.outbound-links a:link, .outbound-links a:visited {
+  color: #888;
 }
 
 a:link, a:visited {
   color: #516bff;
   text-decoration: none;
+  opacity: 0.9;
+}
+
+a:hover {
+  opacity: 1;
 }
 
 a.original-url {

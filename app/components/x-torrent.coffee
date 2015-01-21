@@ -16,8 +16,9 @@ TorrentComponent = Ember.Component.extend
   isComplete: Ember.computed.not 'isDownloading'
 
   sortedFiles: (->
-    files = Ember.A(@get('torrent.files'))
-    files.sortBy 'name'
+    sorted = @get('torrent.files').sortBy 'name'
+    console.log 'sorted', sorted
+    sorted
   ).property 'torrent.files'
 
   percentStr: (->
