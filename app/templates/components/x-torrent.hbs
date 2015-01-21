@@ -16,7 +16,7 @@
     {{#if torrent.canDownload}}
       <ul>
         {{#each sortedFiles}}
-          <li><a {{bind-attr href='url'}} target"_blank">{{name}}</a><a class="original-url" {{bind-attr href='original_url'}}>original</a></li>
+          <li><a {{bind-attr href='url'}} target"_blank">{{name}}</a><a class="original-url" {{bind-attr href='original_url'}}>(original)</a></li>
         {{/each}}
       </ul>
     {{else}}
