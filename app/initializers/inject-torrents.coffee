@@ -13,7 +13,7 @@ injectTorrents =
     container.register key, Ember.ArrayController.extend
       sortProperties: ['addedDate']
       sortAscending: false
-      url: 'https://cucumber.whatbox.ca:20008'
+      url: 'http://cucumber.whatbox.ca:20008'
       request: (path = '', method = 'GET', data = {}, timeout = -1) ->
         ajax
           method: method
