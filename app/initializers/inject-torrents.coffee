@@ -43,9 +43,9 @@ injectTorrents =
       requestTime: 0
       requestDelay: (->
         requestTime = @get('requestTime')
-        delayBase = if requestTime < 500
-          500
-        else if requestTime > 5000
+        delayBase = if requestTime < 2000
+          2000
+        else if requestTime > 10000
           5000
         else
           requestTime
