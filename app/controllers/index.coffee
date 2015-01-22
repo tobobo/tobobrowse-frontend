@@ -1,11 +1,16 @@
 `import Ember from 'ember'`
 
 IndexController = Ember.Controller.extend
-  filteredTorrents: Ember.computed 'torrents', 'torrents.@each', 'query', ->
+  filteredTorrents: []
+  filterTorrents: (->
+    Ember.run.throttle @, @runTorrentFilter, 500
+    Ember.run.debounce @, @runTorrentFilter, 500
+  ).observes 'torrents', 'torrents.@each', 'query'
+  runTorrentFilter: ->
     if @get('query') and @get('query').length > 1
-      @get('torrents').filter (torrent) =>
+      @set 'filteredTorrents', @get('torrents').filter (torrent) =>
         torrent.get('name').toLowerCase().indexOf(@get('query').toLowerCase()) > -1
     else
-      @get('torrents')
+      @set 'filteredTorrents', @get('torrents')
 
 `export default IndexController`

@@ -35,7 +35,12 @@ ul.torrents > li {
 }
 
 .torrent-info {
-  padding: 0.25em 0.25em;
+  padding: 0.5em;
+  border-radius:
+}
+
+.torrent-info.selected {
+  background-color: #FBFBFF
 }
 
 .torrent-info ul {

@@ -1,4 +1,4 @@
-<p class="torrent-search">{{input class='search' value=query}}</p>
+<p class="torrent-search">{{input class='search' value=query action='selectFirstTorrent' targetObject=view}}</p>
 <p class="torrent-input">{{input class='add-torrent' value=url action='addTorrent'}}</p>
 <p class="outbound-links">
   <a href="{{unbound torrents.url}}" target="_blank">Transmission UI</a> -
@@ -12,7 +12,7 @@
   {{#if torrents.isLoading}}
     <li>loading torrents...</li>
   {{else}}
-    <li>no torrents!</li>
+    <li>no torrents{{#if query}} found{{/if}}!</li>
   {{/if}}
 {{/each}}
 </ul>

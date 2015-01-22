@@ -10,7 +10,6 @@ TorrentComponent = Ember.Component.extend
 
   sortedFiles: (->
     sorted = @get('torrent.files').sortBy 'name'
-    console.log 'sorted', sorted
     sorted
   ).property 'torrent.files'
 

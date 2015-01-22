@@ -1,5 +1,5 @@
 <div class="relative">
-  <div class="torrent-info">
+  <div {{bind-attr class=':torrent-info torrent.isSelected:selected'}}>
     {{#if isComplete}}
       <a href="#" class="torrent-name" {{action 'getTorrent'}}>
         {{invisible-spaces torrent.name}}
