@@ -2,10 +2,10 @@
   <div class="torrent-info">
     {{#if isComplete}}
       <a href="#" class="torrent-name" {{action 'getTorrent'}}>
-        {{formattedName}}
+        {{invisible-spaces torrent.name}}
       </a>
     {{else}}
-      <span class="torrent-name">{{formattedName}}</span>
+      <span class="torrent-name">{{invisible-spaces torrent.name}}</span>
     {{/if}}
     {{#if isDownloading}}
       downloading ({{percentStr}}%, {{hh-mm-ss eta}} remaining)
@@ -17,7 +17,7 @@
       <ul>
         {{#each sortedFiles}}
           <li>
-            <a {{bind-attr href='url'}} target"_blank">{{name}}</a>
+            <a {{bind-attr href='url'}} target"_blank" class="file-name">{{invisible-spaces name}}</a>
             <a class="original-url" {{bind-attr href='original_url'}}>(original)</a>
           </li>
         {{/each}}
