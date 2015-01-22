@@ -46,7 +46,7 @@ injectTorrents =
         delayBase = if requestTime < 2000
           2000
         else if requestTime > 10000
-          5000
+          10000
         else
           requestTime
         delayBase*2
