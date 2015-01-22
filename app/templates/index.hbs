@@ -1,3 +1,4 @@
+<p class="torrent-search">{{input class='search' value=query}}</p>
 <p class="torrent-input">{{input class='add-torrent' value=url action='addTorrent'}}</p>
 <p class="outbound-links">
   <a href="{{unbound torrents.url}}" target="_blank">Transmission UI</a> -
@@ -5,7 +6,7 @@
   <a href="https://cucumber.whatbox.ca/filebrowser/" target="_blank">File Manager</a>
 </p>
 <ul class="torrents">
-{{#each torrent in torrents}}
+{{#each torrent in filteredTorrents}}
   {{x-torrent torrent=torrent torrents=torrents}}
 {{else}}
   {{#if torrents.isLoading}}

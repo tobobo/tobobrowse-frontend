@@ -51,26 +51,53 @@ ul {
   margin-bottom: 1em;
 }
 
-.torrent-input {
+.torrent-input, .torrent-search {
   width: 100%;
   max-width: 400px;
 }
 
-.torrent-input input {
-  font-size: 24px;
+input {
+  font-size: 18px;;
   padding-left: 30px;
   width: 100%;
   box-sizing: border-box;
 }
 
-.torrent-input:before {
-  content: '+';
+@media screen and (min-width: 768px) {
+  input {
+    font-size: 24px;
+  }
+}
+
+.torrent-input::before, .torrent-search::before {
   padding: 1px 12px;
   position: absolute;
   opacity: 0.25;
 }
 
-.torrent-input:hover::before {
+.torrent-input::before {
+  content: '+';
+}
+
+.torrent-search::before {
+  content: ' ';
+  background-image: url(/images/search.png);
+  background-size: 12px 12px;
+  height: 24px;
+  width: 12px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media screen and (min-width: 768px) {
+  .torrent-search::before {
+    background-size: 16px 16px;
+    height: 30px;
+    width: 12px;
+  }
+}
+
+.torrent-input:hover::before, .torrent-search:hover::before {
   opacity: 0.5;
 }
 
