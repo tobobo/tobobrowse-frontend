@@ -9,7 +9,11 @@ IndexController = Ember.Controller.extend
   runTorrentFilter: ->
     if @get('query') and @get('query').length > 1
       @set 'filteredTorrents', @get('torrents').filter (torrent) =>
-        torrent.get('name').toLowerCase().indexOf(@get('query').toLowerCase()) > -1
+        queryWords = @get('query').split(' ')
+        for word in queryWords
+          if torrent.get('name').toLowerCase().indexOf(word.toLowerCase()) == -1
+            return false
+        return true
     else
       @set 'filteredTorrents', @get('torrents')
 
