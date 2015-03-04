@@ -15,10 +15,10 @@
     <a class="delete" href="#" {{action 'delete'}}>delete</a>
     {{#if torrent.canDownload}}
       <ul>
-        {{#each sortedFiles}}
+        {{#each file in sortedFiles}}
           <li>
-            <a {{bind-attr href='url'}} target"_blank" class="file-name">{{invisible-spaces name}}</a>
-            <a class="original-url" {{bind-attr href='original_url'}}>(original)</a>
+            <a {{bind-attr href=file.url}} class="file-name" target="_blank">{{invisible-spaces file.name}}</a>
+            <a {{bind-attr href=file.original_url}}  class="original-url" target="blank">(original)</a>
           </li>
         {{/each}}
       </ul>

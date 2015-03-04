@@ -24,7 +24,7 @@ injectTorrents =
           xhrFields:
             withCredentials: true
 
-      content: ((prop, value) ->
+      model: ((prop, value) ->
         Ember.run.next => @refreshTimer()
         Ember.A()
       ).property()
@@ -61,10 +61,10 @@ injectTorrents =
           for torrent in data['torrents']
             @_addTorrent torrent
           @set 'isLoading', false
-          Ember.RSVP.resolve @get('content')
+          Ember.RSVP.resolve @get('model')
 
       _addTorrent: (torrent) ->
-        dupe = @get('content').find (maybeDupe) =>
+        dupe = @get('model').find (maybeDupe) =>
           sameDate = maybeDupe.get('addedDate') == torrent['addedDate']
           if torrent['sizeWhenDone'] > 0
             sameDate
@@ -73,7 +73,7 @@ injectTorrents =
         if dupe?
           dupe.setProperties torrent
         else
-          @get('content').pushObject Ember.Object.create(torrent)
+          @get('model').pushObject Ember.Object.create(torrent)
 
       addTorrent: (url) ->
         @request 'torrents', 'POST',
@@ -91,7 +91,7 @@ injectTorrents =
 
       deleteTorrent: (torrent) ->
         torrent.set 'deleting', true
-        @get('content').removeObject torrent
+        @get('model').removeObject torrent
         @request "torrents/#{torrent.get('name')}", 'DELETE'
         .then =>
           @refreshTimer()
