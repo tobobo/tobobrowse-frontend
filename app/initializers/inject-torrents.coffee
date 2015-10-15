@@ -1,5 +1,6 @@
 `import Ember from 'ember'`
 `import ajax from 'ic-ajax'`
+`import config from '../config/environment'`
 
 injectTorrents =
   name: 'inject-torrents'
@@ -13,7 +14,7 @@ injectTorrents =
     container.register key, Ember.ArrayController.extend
       sortProperties: ['addedDate']
       sortAscending: false
-      url: 'http://cucumber.whatbox.ca:20008'
+      url: config.backendURL
       request: (path = '', method = 'GET', data = {}, timeout = -1) ->
         ajax
           method: method
