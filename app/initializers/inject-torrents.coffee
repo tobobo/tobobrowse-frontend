@@ -1,6 +1,6 @@
 `import Ember from 'ember'`
 `import ajax from 'ic-ajax'`
-`import config from '../../config/environment'`
+`import config from '../config/environment'`
 
 injectTorrents =
   name: 'inject-torrents'
