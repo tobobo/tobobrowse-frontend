@@ -6,7 +6,10 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
-    backendURL: 'http://pork.whatbox.ca:20008',
+    transmissionURL: 'http://pork.whatbox.ca:20008',
+    backendURL: 'http://cucumber.whatbox.ca:8000/',
+    httpURL: 'https://cucumber.whatbox.ca/private/',
+    browserURL: 'https://cucumber.whatbox.ca/filebrowser/',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build

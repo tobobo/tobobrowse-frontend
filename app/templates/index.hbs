@@ -2,8 +2,8 @@
 <p class="torrent-input">{{input class='add-torrent' value=url action='addTorrent'}}</p>
 <p class="outbound-links">
   <a href="{{unbound torrents.url}}" target="_blank">Transmission UI</a> -
-  <a href="https://cucumber.whatbox.ca/private/" target="_blank">HTTP File Browser</a> -
-  <a href="https://cucumber.whatbox.ca/filebrowser/" target="_blank">File Manager</a>
+  <a href="{{unbound torrents.httpURL}}" target="_blank">HTTP File Browser</a> -
+  <a href="{{unbound torrents.browserURL}}" target="_blank">File Manager</a>
 </p>
 <ul class="torrents">
 {{#each torrent in filteredTorrents}}
