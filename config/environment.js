@@ -6,7 +6,7 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
-    transmissionURL: 'http://pork.whatbox.ca:20008',
+    transmissionURL: 'http://pork.whatbox.ca:33304',
     backendURL: 'http://pork.whatbox.ca:8000/',
     httpURL: 'https://pork.whatbox.ca/private/',
     browserURL: 'https://pork.whatbox.ca/filebrowser/',
